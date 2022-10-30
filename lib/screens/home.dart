@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:todo_app/widgets/theme.dart';
+import 'package:todo_app/widgets/todo_body.dart';
+import 'package:todo_app/widgets/todo_head.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -8,7 +10,11 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.darkBlue,
-      body: const Center(child: Text("Todo App")),
+      body: SafeArea(
+        child: Column(
+          children: const [TodoHead(), TodoBody()],
+        ),
+      ),
     );
   }
 }
