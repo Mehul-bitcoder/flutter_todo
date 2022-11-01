@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/widgets/theme.dart';
 import 'package:todo_app/widgets/todo_head_info.dart';
 import 'package:todo_app/widgets/todo_input.dart';
 
 class TodoHead extends StatelessWidget {
-  const TodoHead({super.key});
+  TodoHead({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var taskCount = 0;
+    var taskCount = Provider.of<TodoModel>(context).getTodos.length;
+
     return Container(
       // decoration: BoxDecoration(color: Colors.amber),
       height: MediaQuery.of(context).size.height * 0.4,
@@ -29,10 +32,12 @@ class TodoHead extends StatelessWidget {
             TodoInput(),
             Padding(
               padding: const EdgeInsets.only(left: 5, top: 5),
-              child: Text(
-                "You have $taskCount Tasks",
-                style: TextStyle(color: AppTheme.white, fontSize: 16),
-              ),
+              child: Consumer(builder: ((context, value, child) {
+                return Text(
+                  "You have ${taskCount} Tasks",
+                  style: TextStyle(color: AppTheme.white, fontSize: 16),
+                );
+              })),
             )
           ],
         ),
